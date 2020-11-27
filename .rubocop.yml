@@ -1,0 +1,8 @@
+require: rubocop-rails
+
+AllCops:
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  ExtraDetails: false
+  NewCops: enable
+  TargetRubyVersion: 2.7.2
