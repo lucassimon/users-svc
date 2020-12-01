@@ -163,6 +163,9 @@ GEM
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 0.87.0)
+    rubocop-rspec (2.0.0)
+      rubocop (~> 1.0)
+      rubocop-ast (>= 1.1.0)
     ruby-progressbar (1.10.1)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
@@ -198,6 +201,7 @@ DEPENDENCIES
   rspec-rails (~> 4.0.1)
   rubocop (~> 1.4)
   rubocop-rails
+  rubocop-rspec
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
