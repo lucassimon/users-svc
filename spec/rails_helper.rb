@@ -1,5 +1,15 @@
 # frozen_string_literal: true
 
+# Load and configure simplecov
+require 'simplecov'
+SimpleCov.start 'rails' do
+  add_filter do |source_file|
+    source_file.lines.count < 3
+  end
+
+  maximum_coverage_drop 1
+end
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'

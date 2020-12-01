@@ -48,6 +48,7 @@ group :test do
   gem 'database_cleaner-active_record'
   gem 'faker'
   gem 'shoulda-matchers', '~> 4.0'
+  gem 'simplecov', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
