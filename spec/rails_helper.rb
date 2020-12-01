@@ -8,6 +8,7 @@ require File.expand_path('../config/environment', __dir__)
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+require 'database_cleaner/active_record'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -74,4 +75,16 @@ RSpec.configure do |config|
 
   # Allow non prefaced FactoryBot methods
   config.include FactoryBot::Syntax::Methods
+
+  # Define database cleaner strategies
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.around do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
 end
