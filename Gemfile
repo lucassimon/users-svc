@@ -32,10 +32,15 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
+# Use Rswag as the tool to generate OAS based on request specs
+gem 'rswag-api', '~> 2.3'
+gem 'rswag-ui', '~> 2.3'
+
 group :development, :test do
   gem 'debase'
   gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 4.0.1'
+  gem 'rswag-specs', '~> 2.3'
   gem 'ruby-debug-ide'
 end
 
