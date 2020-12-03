@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Config.setup do |config|
   # Name of the constant exposing loaded settings
   config.const_name = 'Settings'
@@ -46,10 +48,9 @@ Config.setup do |config|
 
   # Validate presence and type of specific config values. Check https://github.com/dry-rb/dry-validation for details.
   #
-  # config.schema do
-  #   required(:name).filled
-  #   required(:age).maybe(:int?)
-  #   required(:email).filled(format?: EMAIL_REGEX)
-  # end
-
+  config.schema do
+    required(:database).hash do
+      required(:url).filled(:string)
+    end
+  end
 end
