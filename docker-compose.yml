@@ -17,5 +17,3 @@ services:
       - "26162:26162"
     depends_on:
       - db
-    environment:
-      DATABASE_URL: postgres://postgres:postgres@db:5432
