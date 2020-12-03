@@ -39,6 +39,7 @@ gem 'rswag-ui', '~> 2.3'
 group :development, :test do
   gem 'debase'
   gem 'factory_bot_rails'
+  gem 'pry', '~> 0.13.1'
   gem 'rspec-rails', '~> 4.0.1'
   gem 'rswag-specs', '~> 2.3'
   gem 'ruby-debug-ide'
