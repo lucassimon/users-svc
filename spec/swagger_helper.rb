@@ -6,7 +6,7 @@ RSpec.configure do |config|
   # Specify a root folder where Swagger JSON files are generated
   # NOTE: If you're using the rswag-api to serve API descriptions, you'll need
   # to ensure that it's configured to serve Swagger from the same folder
-  config.swagger_root = Rails.root.join('swagger').to_s
+  config.swagger_root = Rails.root.join(Settings.api.docs.root).to_s
 
   # Define one or more Swagger documents and provide global metadata for each one
   # When you run the 'rswag:specs:swaggerize' rake task, the complete Swagger will
@@ -14,12 +14,13 @@ RSpec.configure do |config|
   # By default, the operations defined in spec files are added to the first
   # document below. You can override this behavior by adding a swagger_doc tag to the
   # the root example_group in your specs, e.g. describe '...', swagger_doc: 'v2/swagger.json'
-  config.swagger_docs = {
-    'v1/swagger.yaml' => {
-      openapi: '3.0.1',
+  config.swagger_docs = {}
+  Settings.api.docs.versions.each do |api_version|
+    config.swagger_docs[api_version.id] = {
+      openapi: api_version.openapi,
       info: {
-        title: 'API V1',
-        version: 'v1'
+        title: api_version.title,
+        version: api_version.version
       },
       paths: {},
       servers: [
@@ -27,13 +28,13 @@ RSpec.configure do |config|
           url: 'https://{defaultHost}',
           variables: {
             defaultHost: {
-              default: 'www.example.com'
+              default: api_version.default_host
             }
           }
         }
       ]
     }
-  }
+  end
 
   # Specify the format of the output Swagger file when running 'rswag:specs:swaggerize'.
   # The swagger_docs configuration option has the filename including format in
