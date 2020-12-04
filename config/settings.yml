@@ -13,6 +13,38 @@ api:
         openapi: '3.0.3'
         title: 'Minato Rails'
         version: 'v1'
+  schemas:
+    blog:
+      type: 'object'
+      properties:
+        id:
+          type: 'integer'
+        content:
+          type: 'string'
+        title:
+          type: 'string'
+        created_at:
+          type: 'string'
+          format: 'date-time'
+        updated_at:
+          type: 'string'
+          format: 'date-time'
+    new_blog:
+      type: 'object'
+      properties:
+        content:
+          type: 'string'
+        title:
+          type: 'string'
+      required:
+        - title
+        - content
+    error_object:
+      type: 'object'
+      properties:
+        message:
+          type: 'string'
+
 
 # CORS settings
 cors:
