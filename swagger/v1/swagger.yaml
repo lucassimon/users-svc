@@ -1,0 +1,85 @@
+---
+openapi: 3.0.3
+info:
+  title: Minato Rails
+  version: v1
+paths:
+  "/v1/blogs":
+    post:
+      summary: Creates a blog
+      tags:
+      - Blogs
+      parameters: []
+      responses:
+        '201':
+          description: blog created
+          content: {}
+        '422':
+          description: invalid request
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#components/schemas/new_blog"
+  "/v1/blogs/{id}":
+    get:
+      summary: Retrieves a blog
+      tags:
+      - Blogs
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: blog found
+          content:
+            application/json:
+              schema:
+                "$ref": "#components/schemas/blog"
+        '404':
+          description: blog not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#components/schemas/error_object"
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
+components:
+  schemas:
+    blog:
+      type: object
+      properties:
+        id:
+          type: integer
+        content:
+          type: string
+        title:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    new_blog:
+      type: object
+      properties:
+        content:
+          type: string
+        title:
+          type: string
+      required:
+      - title
+      - content
+    error_object:
+      type: object
+      properties:
+        message:
+          type: string
