@@ -14,6 +14,10 @@ api:
         title: 'Minato Rails'
         version: 'v1'
 
+# CORS settings
+cors:
+  allowed_origins: '*'
+
 # Database connection url
 database:
   url: ''

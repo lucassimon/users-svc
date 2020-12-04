@@ -30,7 +30,7 @@ gem 'pundit'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
 
 # Use Rswag as the tool to generate OAS based on request specs
 gem 'rswag-api', '~> 2.3'
