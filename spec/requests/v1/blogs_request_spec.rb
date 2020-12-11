@@ -18,7 +18,7 @@ describe 'V1::Blog', type: :request, swagger_doc: 'v1/swagger.yaml' do
       response '422', 'invalid request' do
         schema '$ref' => '#components/schemas/error_object'
 
-        let(:blog) { { title: 'foo' } }
+        let(:blog) { { title: '' } }
         run_test!
       end
     end

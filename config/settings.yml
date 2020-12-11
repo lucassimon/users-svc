@@ -19,8 +19,6 @@ api:
       properties:
         id:
           type: 'integer'
-        content:
-          type: 'string'
         title:
           type: 'string'
         created_at:
@@ -32,8 +30,6 @@ api:
     new_blog:
       type: 'object'
       properties:
-        content:
-          type: 'string'
         title:
           type: 'string'
       required:
