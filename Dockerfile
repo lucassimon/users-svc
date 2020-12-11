@@ -1,6 +1,6 @@
-FROM ruby:2.7.2
+FROM ruby:2.7.2-alpine
 
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+RUN apk -U add build-base postgresql-dev tzdata nodejs
 ENV APP_DIR=/api
 WORKDIR ${APP_DIR}
 
