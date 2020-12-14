@@ -37,11 +37,9 @@ The app configurations are located at
 ```
 config/settings.yml
 config/settings/#{environment}.yml
-config/environments/#{environment}.yml
 
 config/settings.local.yml
 config/settings/#{environment}.local.yml
-config/environments/#{environment}.local.yml
 ```
 Settings defined in files that are lower in the list override settings higher.
 
