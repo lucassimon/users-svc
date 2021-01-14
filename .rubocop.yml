@@ -1,0 +1,16 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  ExtraDetails: false
+  NewCops: enable
+  TargetRubyVersion: 2.7.2
+
+Metrics/BlockLength:
+  Max: 50
+
+RSpec/EmptyExampleGroup:
+  Enabled: false

@@ -1,0 +1,51 @@
+# API specifications settings
+api:
+  docs:
+    auth:
+      password: ''
+      username: ''
+    root: 'swagger'
+    versions:
+      - default_host: 'localhost:3000'
+        description: 'Minato Rails Docs'
+        endpoint: '/api-docs/v1/swagger.yaml'
+        id: 'v1/swagger.yaml'
+        openapi: '3.0.3'
+        title: 'Minato Rails'
+        version: 'v1'
+  schemas:
+    blog:
+      type: 'object'
+      properties:
+        id:
+          type: 'integer'
+        title:
+          type: 'string'
+        created_at:
+          type: 'string'
+          format: 'date-time'
+        updated_at:
+          type: 'string'
+          format: 'date-time'
+    new_blog:
+      type: 'object'
+      properties:
+        title:
+          type: 'string'
+      required:
+        - title
+        - content
+    error_object:
+      type: 'object'
+      properties:
+        message:
+          type: 'string'
+
+
+# CORS settings
+cors:
+  allowed_origins: '*'
+
+# Database connection url
+database:
+  url: ''
