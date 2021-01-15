@@ -10,6 +10,7 @@ AllCops:
   TargetRubyVersion: 2.7.2
 
 Metrics/BlockLength:
+  ExcludedMethods: ['describe']
   Max: 50
 
 RSpec/EmptyExampleGroup:
