@@ -17,3 +17,6 @@ RSpec/EmptyExampleGroup:
 
 RSpec/ImplicitExpect:
   Enabled: false
+
+Style/Documentation:
+  Enabled: false
