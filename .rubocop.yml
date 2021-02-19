@@ -14,3 +14,9 @@ Metrics/BlockLength:
 
 RSpec/EmptyExampleGroup:
   Enabled: false
+
+RSpec/ImplicitExpect:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
