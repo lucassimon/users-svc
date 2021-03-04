@@ -12,5 +12,9 @@ module ExceptionHandler
     rescue_from ActiveRecord::RecordInvalid do |e|
       render json: { message: e.message }, status: :unprocessable_entity
     end
+
+    rescue_from Pundit::NotAuthorizedError do |e|
+      render json: { message: e.message }, status: :forbidden
+    end
   end
 end
