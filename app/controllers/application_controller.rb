@@ -8,7 +8,6 @@ class ApplicationController < ActionController::API
   include Pundit
 
   def current_user
-    identity_id = auth_token.first['session']['identity']['id']
-    @current_user ||= User.find_by(identity_id: identity_id)
+    raise NotImplementedError
   end
 end
