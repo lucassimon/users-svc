@@ -17,3 +17,5 @@ services:
       - "26162:26162"
     depends_on:
       - db
+    environment:
+      - SWAGGER_DRY_RUN=0 # required to generate coverage to rswag tests
