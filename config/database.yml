@@ -6,13 +6,15 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  url: <%= Settings.database.url %>
 
 development:
   <<: *default
+  url: <%= "#{Settings.database.url}/minato_rails_development" %>
 
 test:
   <<: *default
+  url: <%= "#{Settings.database.url}/minato_rails_test" %>
 
 production:
   <<: *default
+  url: <%= Settings.database.url %>
