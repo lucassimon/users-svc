@@ -1,4 +1,4 @@
-FROM ruby:2.7.2-alpine
+FROM ruby:2.7.3-alpine
 
 RUN apk -U add build-base postgresql-dev tzdata nodejs
 ENV APP_DIR=/api
