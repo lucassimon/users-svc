@@ -25,3 +25,5 @@ services:
     depends_on:
       - db
       - db-migration
+    environment:
+      - SWAGGER_DRY_RUN=0 # required to generate coverage to rswag tests
