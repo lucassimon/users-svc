@@ -13,15 +13,34 @@ paths:
       responses:
         '201':
           description: blog created
-          content: {}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/blog"
         '422':
           description: invalid request
-          content: {}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_object"
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#components/schemas/new_blog"
+              "$ref": "#/components/schemas/new_blog"
+    get:
+      summary: Get the blogs list
+      tags:
+      - Blogs
+      responses:
+        '200':
+          description: the blogs list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/blog"
   "/v1/blogs/{id}":
     get:
       summary: Retrieves a blog
@@ -35,17 +54,70 @@ paths:
           type: string
       responses:
         '200':
-          description: blog found
+          description: the blog found
           content:
             application/json:
               schema:
-                "$ref": "#components/schemas/blog"
+                "$ref": "#/components/schemas/blog"
         '404':
           description: blog not found
           content:
             application/json:
               schema:
-                "$ref": "#components/schemas/error_object"
+                "$ref": "#/components/schemas/error_object"
+    put:
+      summary: Updates a blog
+      tags:
+      - Blogs
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: the updated blog
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/blog"
+        '404':
+          description: blog not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_object"
+        '422':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_object"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/new_blog"
+    delete:
+      summary: Removes a blog
+      tags:
+      - Blogs
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Removes the blog successfuly
+        '404':
+          description: blog not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_object"
 servers:
 - url: http://{defaultHost}
   variables:
