@@ -7,6 +7,6 @@ Rails.application.routes.draw do
   Healthcheck.routes(self)
 
   namespace :v1 do
-    resources :blogs, only: %i[create show]
+    resources :blogs
   end
 end

@@ -3,7 +3,12 @@
 module V1
   # Blogs API
   class BlogsController < ApplicationController
-    before_action :set_blog, only: %i[show]
+    before_action :set_blog, only: %i[show update destroy]
+
+    def index
+      @blogs = Blog.all
+      render json: @blogs, status: :ok
+    end
 
     def show
       render json: @blog, status: :ok
@@ -14,10 +19,20 @@ module V1
       render json: @blog, status: :created
     end
 
+    def update
+      @blog.update!(blog_params)
+      render json: @blog, status: :ok
+    end
+
+    def destroy
+      @blog.destroy!
+      head :no_content
+    end
+
     private
 
     def blog_params
-      params.required(:blog).permit(:title, :content)
+      params.required(:blog).permit(:title)
     end
 
     def set_blog
