@@ -48,7 +48,7 @@ cors:
 
 # Database connection url
 database:
-  url: ''
+  url: <%= ENV.fetch("DATABASE_URL") { "postgres://postgres:postgres@db:5432" } %>
 
 # I18n Settings
 i18n:

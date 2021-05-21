@@ -10,9 +10,11 @@ default: &default
 
 development:
   <<: *default
+  database: minato_rails_development
 
 test:
   <<: *default
+  database: minato_rails_test
 
 production:
   <<: *default
