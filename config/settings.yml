@@ -21,6 +21,8 @@ api:
           type: 'integer'
         title:
           type: 'string'
+        author_id:
+          type: 'integer'
         created_at:
           type: 'string'
           format: 'date-time'
@@ -32,9 +34,11 @@ api:
       properties:
         title:
           type: 'string'
+        author_id:
+          type: 'integer'
       required:
         - title
-        - content
+        - author_id
     error_object:
       type: 'object'
       properties:

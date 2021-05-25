@@ -32,7 +32,7 @@ module V1
     private
 
     def blog_params
-      params.required(:blog).permit(:title)
+      params.require(:blog).permit(:title, :author_id)
     end
 
     def set_blog
