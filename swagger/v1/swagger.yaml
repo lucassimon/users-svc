@@ -10,6 +10,8 @@ paths:
       tags:
       - Blogs
       parameters: []
+      security:
+      - bearer_auth: []
       responses:
         '201':
           description: blog created
@@ -17,6 +19,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/blog"
+        '401':
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_object"
         '422':
           description: invalid request
           content:
@@ -32,6 +40,8 @@ paths:
       summary: Get the blogs list
       tags:
       - Blogs
+      security:
+      - bearer_auth: []
       responses:
         '200':
           description: the blogs list
@@ -41,6 +51,12 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/blog"
+        '401':
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_object"
   "/v1/blogs/{id}":
     get:
       summary: Retrieves a blog
@@ -52,6 +68,8 @@ paths:
         required: true
         schema:
           type: string
+      security:
+      - bearer_auth: []
       responses:
         '200':
           description: the blog found
@@ -59,6 +77,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/blog"
+        '401':
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_object"
         '404':
           description: blog not found
           content:
@@ -75,6 +99,8 @@ paths:
         required: true
         schema:
           type: string
+      security:
+      - bearer_auth: []
       responses:
         '200':
           description: the updated blog
@@ -82,6 +108,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/blog"
+        '401':
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_object"
         '404':
           description: blog not found
           content:
@@ -109,9 +141,17 @@ paths:
         required: true
         schema:
           type: string
+      security:
+      - bearer_auth: []
       responses:
         '204':
           description: Removes the blog successfuly
+        '401':
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_object"
         '404':
           description: blog not found
           content:
@@ -132,6 +172,8 @@ components:
           type: integer
         title:
           type: string
+        author_id:
+          type: integer
         created_at:
           type: string
           format: date-time
@@ -143,11 +185,17 @@ components:
       properties:
         title:
           type: string
+        author_id:
+          type: integer
       required:
       - title
-      - content
+      - author_id
     error_object:
       type: object
       properties:
         message:
           type: string
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
