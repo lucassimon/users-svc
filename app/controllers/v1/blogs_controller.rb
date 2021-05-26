@@ -7,25 +7,30 @@ module V1
     before_action :set_blog, only: %i[show update destroy]
 
     def index
-      @blogs = Blog.all
+      @blogs = policy_scope(Blog)
       render json: @blogs, status: :ok
     end
 
     def show
+      authorize @blog
       render json: @blog, status: :ok
     end
 
     def create
-      @blog = Blog.create!(blog_params)
+      @blog = Blog.new(blog_params)
+      authorize @blog
+      @blog.save!
       render json: @blog, status: :created
     end
 
     def update
+      authorize @blog
       @blog.update!(blog_params)
       render json: @blog, status: :ok
     end
 
     def destroy
+      authorize @blog
       @blog.destroy!
       head :no_content
     end
