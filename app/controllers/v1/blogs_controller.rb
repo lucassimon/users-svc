@@ -3,6 +3,7 @@
 module V1
   # Blogs API
   class BlogsController < ApplicationController
+    before_action :authenticate_request!
     before_action :set_blog, only: %i[show update destroy]
 
     def index

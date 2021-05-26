@@ -9,17 +9,30 @@ describe 'V1::Blog', type: :request, swagger_doc: 'v1/swagger.yaml' do
       consumes 'application/json'
       parameter name: :blog, in: :body, schema: { '$ref' => '#/components/schemas/new_blog' }
       produces 'application/json'
+      security [bearer_auth: []]
+
+      let(:blog) { attributes_for(:blog) }
 
       response '201', 'blog created' do
         schema '$ref' => '#/components/schemas/blog'
 
-        let(:blog) { attributes_for(:blog) }
+        include_context 'with jwt authentication'
+
+        run_test!
+      end
+
+      response '401', 'Not authorized' do
+        schema '$ref' => '#/components/schemas/error_object'
+
+        include_context 'with missing jwt authentication'
+
         run_test!
       end
 
       response '422', 'invalid request' do
         schema '$ref' => '#/components/schemas/error_object'
 
+        include_context 'with jwt authentication'
         let(:blog) { { title: '' } }
         run_test!
       end
@@ -28,6 +41,7 @@ describe 'V1::Blog', type: :request, swagger_doc: 'v1/swagger.yaml' do
     get 'Get the blogs list' do
       tags 'Blogs'
       produces 'application/json'
+      security [bearer_auth: []]
 
       response '200', 'the blogs list' do
         schema type: :array,
@@ -35,7 +49,17 @@ describe 'V1::Blog', type: :request, swagger_doc: 'v1/swagger.yaml' do
                  '$ref' => '#/components/schemas/blog'
                }
 
+        include_context 'with jwt authentication'
+
         let(:blogs) { create_list(:blog, 10) }
+        run_test!
+      end
+
+      response '401', 'Not authorized' do
+        schema '$ref' => '#/components/schemas/error_object'
+
+        include_context 'with missing jwt authentication'
+
         run_test!
       end
     end
@@ -46,16 +70,28 @@ describe 'V1::Blog', type: :request, swagger_doc: 'v1/swagger.yaml' do
       tags 'Blogs'
       parameter name: :id, in: :path, type: :string
       produces 'application/json'
+      security [bearer_auth: []]
+
+      let(:id) { create(:blog).id }
 
       response '200', 'the blog found' do
         schema '$ref' => '#/components/schemas/blog'
+        include_context 'with jwt authentication'
 
-        let(:id) { create(:blog).id }
+        run_test!
+      end
+
+      response '401', 'Not authorized' do
+        schema '$ref' => '#/components/schemas/error_object'
+
+        include_context 'with missing jwt authentication'
+
         run_test!
       end
 
       response '404', 'blog not found' do
         schema '$ref' => '#/components/schemas/error_object'
+        include_context 'with jwt authentication'
 
         let(:id) { 0 }
         run_test!
@@ -68,18 +104,29 @@ describe 'V1::Blog', type: :request, swagger_doc: 'v1/swagger.yaml' do
       parameter name: :id, in: :path, type: :string
       parameter name: :blog, in: :body, schema: { '$ref' => '#/components/schemas/new_blog' }
       produces 'application/json'
+      security [bearer_auth: []]
 
       let(:id) { create(:blog).id }
       let(:blog) { { title: 'New title' } }
 
       response '200', 'the updated blog' do
         schema '$ref' => '#/components/schemas/blog'
+        include_context 'with jwt authentication'
+
+        run_test!
+      end
+
+      response '401', 'Not authorized' do
+        schema '$ref' => '#/components/schemas/error_object'
+
+        include_context 'with missing jwt authentication'
 
         run_test!
       end
 
       response '404', 'blog not found' do
         schema '$ref' => '#/components/schemas/error_object'
+        include_context 'with jwt authentication'
 
         let(:id) { 0 }
 
@@ -88,6 +135,7 @@ describe 'V1::Blog', type: :request, swagger_doc: 'v1/swagger.yaml' do
 
       response '422', 'invalid request' do
         schema '$ref' => '#/components/schemas/error_object'
+        include_context 'with jwt authentication'
 
         let(:blog) { { title: '' } }
 
@@ -99,15 +147,27 @@ describe 'V1::Blog', type: :request, swagger_doc: 'v1/swagger.yaml' do
       tags 'Blogs'
       parameter name: :id, in: :path, type: :string
       produces 'application/json'
+      security [bearer_auth: []]
 
       let(:id) { create(:blog).id }
 
       response '204', 'Removes the blog successfuly' do
+        include_context 'with jwt authentication'
+
+        run_test!
+      end
+
+      response '401', 'Not authorized' do
+        schema '$ref' => '#/components/schemas/error_object'
+
+        include_context 'with missing jwt authentication'
+
         run_test!
       end
 
       response '404', 'blog not found' do
         schema '$ref' => '#/components/schemas/error_object'
+        include_context 'with jwt authentication'
 
         let(:id) { 0 }
 
