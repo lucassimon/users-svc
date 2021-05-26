@@ -20,6 +20,12 @@ paths:
               schema:
                 "$ref": "#/components/schemas/blog"
         '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_object"
+        '403':
           description: Not authorized
           content:
             application/json:
@@ -52,7 +58,7 @@ paths:
                 items:
                   "$ref": "#/components/schemas/blog"
         '401':
-          description: Not authorized
+          description: Not authenticated
           content:
             application/json:
               schema:
@@ -78,6 +84,12 @@ paths:
               schema:
                 "$ref": "#/components/schemas/blog"
         '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_object"
+        '403':
           description: Not authorized
           content:
             application/json:
@@ -109,6 +121,12 @@ paths:
               schema:
                 "$ref": "#/components/schemas/blog"
         '401':
+          description: Not authenticated
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_object"
+        '403':
           description: Not authorized
           content:
             application/json:
@@ -147,6 +165,12 @@ paths:
         '204':
           description: Removes the blog successfuly
         '401':
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error_object"
+        '403':
           description: Not authorized
           content:
             application/json:
