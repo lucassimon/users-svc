@@ -13,6 +13,9 @@ api:
         openapi: '3.0.3'
         title: 'Minato Rails'
         version: 'v1'
+  secure:
+    issuer: <%= ENV.fetch("HOSTS_GATEWAY_SVC") { "" } %>
+    jwks_uri: '<%= ENV.fetch("HOSTS_GATEWAY_SVC_API") { "" } %>/.well-known/jwks.json'
   schemas:
     blog:
       type: 'object'
@@ -44,7 +47,7 @@ api:
       properties:
         message:
           type: 'string'
-
+  
 
 # CORS settings
 cors:
