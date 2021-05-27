@@ -3,7 +3,7 @@
 class BlogPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.where(author_id: user['id'])
+      scope.where(author_id: user[:id])
     end
   end
 
@@ -26,6 +26,6 @@ class BlogPolicy < ApplicationPolicy
   private
 
   def owner?
-    user['id'] == record.author_id
+    user[:id] == record.author_id
   end
 end

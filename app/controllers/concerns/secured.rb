@@ -6,7 +6,7 @@ module Secured
   private
 
   def authenticate_request!
-    @current_user ||= auth_token['session']['user'] if auth_token['session']
+    @current_user ||= auth_token['session']['user'].symbolize_keys if auth_token['session']
   end
 
   def http_token
