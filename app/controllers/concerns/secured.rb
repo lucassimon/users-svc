@@ -6,14 +6,16 @@ module Secured
   private
 
   def authenticate_request!
-    auth_token
+    @current_user ||= auth_token['session']['user'].symbolize_keys if auth_token['session']
   end
 
   def http_token
-    request.headers['Authorization'].split.last if request.headers['Authorization'].present?
+    return nil if request.headers['Authorization'].blank?
+
+    request.headers['Authorization'].split.last
   end
 
   def auth_token
-    JsonWebToken.verify(http_token)
+    @auth_token ||= JsonWebToken.verify(http_token)
   end
 end

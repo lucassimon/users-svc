@@ -8,7 +8,12 @@
 #  title      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  author_id  :integer          not null
+#
+# Indexes
+#
+#  index_blogs_on_author_id  (author_id)
 #
 class Blog < ApplicationRecord
-  validates :title, presence: true
+  validates :title, :author_id, presence: true
 end

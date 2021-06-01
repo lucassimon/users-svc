@@ -17,8 +17,8 @@ module ExceptionHandler
       render json: { message: e.message }, status: :forbidden
     end
 
-    rescue_from JWT::VerificationError, JWT::DecodeError do |e|
-      render json: { message: 'invalid token' }, status: :unauthorized
+    rescue_from JWT::VerificationError, JWT::DecodeError do
+      render json: { message: 'Missing or invalid token' }, status: :unauthorized
     end
   end
 end

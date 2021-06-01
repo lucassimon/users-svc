@@ -7,7 +7,5 @@ class ApplicationController < ActionController::API
   include Secured
   include Pundit
 
-  def current_user
-    raise NotImplementedError
-  end
+  attr_reader :current_user
 end
