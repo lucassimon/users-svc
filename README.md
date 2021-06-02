@@ -45,14 +45,7 @@ Settings defined in files that are lower in the list override settings higher.
 
 For more information, please see the [Config](https://github.com/rubyconfig/config) documentation.
 
-**The required settings are:**
-
-```yml
-database:
-  url: 'postgresql://postgres:postgres@db:5432/{my-database}'
-```
-
-**For development and test environments.**
+> The database connection is pre-configured. You just need to change the development and test database names, located at config/database.yml file.
 
 ## Local development environment
 
@@ -62,8 +55,7 @@ We use docker and docker-compose for development environment.
 
 Under the app folder execute the following commands:
 ```bash
-$ docker-compose build
-$ docker-compose up
+$ docker-compose up --build
 ```
 
 ### Starting the Rails server
