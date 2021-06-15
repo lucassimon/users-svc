@@ -2,6 +2,7 @@
 
 require 'json_web_token'
 require 'profiles/session'
+require 'kratos/session'
 
 class ApplicationController < ActionController::API
   include ExceptionHandler
