@@ -68,6 +68,9 @@ module Kratos
 
       # TODO: Change for the output::as_json::json_response
       json_response response_registration.body
+
+      # notification_svc = service.new
+      # notification_svc.send('email', "confirmar o email com o respectivo link")
     end
   
     # Example with curl
@@ -180,13 +183,16 @@ module Kratos
 
       # TODO: POST data todo password_recovery
 
-      response_password_recovery = post_password_recovery(flow_id, email)
+      response_password_recovery = post_password_recovery(flow_id, payload)
 
       # TODO: Check errors
       raise_exception response_password_recovery unless response_password_recovery.code == 200
 
       # TODO: Change for the output::as_json::json_response
       json_response response_password_recovery.body
+
+      # notification_svc = service.new
+      # notification_svc.send('email', "link para resetar password")
     end
 
     # curl -s -X GET \
@@ -204,12 +210,12 @@ module Kratos
       response
     end
 
-    def post_password_recovery(flow_id, email)
+    def post_password_recovery(flow_id, payload)
       # POST the flow
 
       options = { 
         headers: { 'Content-type' => 'application/json' }.merge!(@default_options[:headers]), 
-        body: { email: email }.to_json 
+        body: { email: payload['email'] }.to_json 
       }
       
       # TODO: Call the request
