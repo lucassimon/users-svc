@@ -164,8 +164,8 @@ module Kratos
   
     end
 
-    def recovery_password(payload)
-  
+    def password_recovery(payload)
+      
     end
   
     def verification(payload)
