@@ -7,13 +7,27 @@ module V1
     # before_action :authenticate_request!
     before_action :set_blog, only: %i[show update destroy]
 
-    def index
+    def password_recovery
       # @blogs = policy_scope(Blog)
       session = Kratos::Session.new
       payload = { schema_id: 'default', "password": "foo_bar_123", traits: { 'email' => 'teste20@gmail.com' }}
       response = session.register(payload)
       
       render json: response, status: :ok
+    end
+
+    def index
+      # TODO: get the email from request.body
+
+      # TODO: Get the email first in database
+      
+      # TODO: Send though kratos the recovery 
+      session = Kratos::Session.new
+      payload = { 'email' => 'teste20@gmail.com' }
+      response = session.password_recovery(payload)
+
+      render json: response, status: :ok
+
     end
 
     def show

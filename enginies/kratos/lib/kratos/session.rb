@@ -87,7 +87,7 @@ module Kratos
     # }
     def get_registration_api()
       options = { 
-          headers: { 'Content-type' => 'application/json' }.merge!(@default_options[:headers]) 
+        headers: { 'Content-type' => 'application/json' }.merge!(@default_options[:headers]) 
       }
       # TODO: Call the request
       response = self.class.get('/self-service/registration/api', options)
@@ -144,9 +144,9 @@ module Kratos
       body = {'method': 'password'}.merge!(payload)
 
       options = { 
-          headers: { 'Content-type' => 'application/json' }.merge!(@default_options[:headers]),
-          query: { 'flow' => flow_id },
-          body: body.to_json 
+        headers: { 'Content-type' => 'application/json' }.merge!(@default_options[:headers]),
+        query: { 'flow' => flow_id },
+        body: body.to_json 
       }
 
       # TODO: Call the request
@@ -164,8 +164,62 @@ module Kratos
   
     end
 
+    
     def password_recovery(payload)
+      # payload = { 'email' => 'teste20@gmail.com' }
+
+      # TODO: Request the flow_id
+      response_flow = get_password_recovery()
+
+      # TODO: Check errors
+      raise_exception response_flow unless response_flow.code == 200
+
+      # TODO: Get the flow_id from the response above
+
+      flow_id = json_response(response_flow.body)[:id]
+
+      # TODO: POST data todo password_recovery
+
+      response_password_recovery = post_password_recovery(flow_id, email)
+
+      # TODO: Check errors
+      raise_exception response_password_recovery unless response_password_recovery.code == 200
+
+      # TODO: Change for the output::as_json::json_response
+      json_response response_password_recovery.body
+    end
+
+    # curl -s -X GET \
+    # -H "Accept: application/json" \
+    # http://127.0.0.1:4433/self-service/recovery/api | \
+    #   jq
+    def get_password_recovery()
+      options = { 
+        headers: { 'Content-type' => 'application/json' }.merge!(@default_options[:headers]) 
+      }
+      #  GET the flow
+      response = self.class.get('/self-service/recovery/api', options)
+
+      # return response
+      response
+    end
+
+    def post_password_recovery(flow_id, email)
+      # POST the flow
+
+      options = { 
+        headers: { 'Content-type' => 'application/json' }.merge!(@default_options[:headers]), 
+        body: { email: email }.to_json 
+      }
       
+      # TODO: Call the request
+      response = self.class.post('/self-service/recovery', options)
+
+      # TODO: Raise an expection here or let the register method dispatch it
+
+      # TODO: Return the response
+      response
+
     end
   
     def verification(payload)
