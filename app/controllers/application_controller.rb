@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'json_web_token'
+require 'profiles/session'
 
 class ApplicationController < ActionController::API
   include ExceptionHandler

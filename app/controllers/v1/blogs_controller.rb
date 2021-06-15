@@ -1,14 +1,19 @@
 # frozen_string_literal: true
 
+
 module V1
   # Blogs API
   class BlogsController < ApplicationController
-    before_action :authenticate_request!
+    # before_action :authenticate_request!
     before_action :set_blog, only: %i[show update destroy]
 
     def index
-      @blogs = policy_scope(Blog)
-      render json: @blogs, status: :ok
+      # @blogs = policy_scope(Blog)
+      session = Kratos::Session.new
+      payload = { schema_id: 'default', "password": "foo_bar_123", traits: { 'email' => 'teste20@gmail.com' }}
+      response = session.register(payload)
+      
+      render json: response, status: :ok
     end
 
     def show

@@ -1,15 +1,15 @@
 FROM ruby:2.7.3-alpine
 
-RUN apk -U add build-base postgresql-dev tzdata nodejs
+RUN apk -U add build-base postgresql-dev tzdata nodejs curl ruby-dev git build-base libxml2-dev libxslt-dev curl-dev
 ENV APP_DIR=/api
 WORKDIR ${APP_DIR}
 
 COPY Gemfile ${APP_DIR}/Gemfile
 COPY Gemfile.lock ${APP_DIR}/Gemfile.lock
 
-RUN bundle install
-
 COPY . ${APP_DIR}
+
+RUN bundle install
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
